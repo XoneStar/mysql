@@ -47,6 +47,7 @@ type Config struct {
 	// for dropping and altering existing constraints of any type.
 	// see https://dev.mysql.com/doc/refman/8.0/en/alter-table.html
 	DontSupportDropConstraint bool
+	IgnoreUpperLowerCase      bool
 }
 
 type Dialector struct {

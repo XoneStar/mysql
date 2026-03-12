@@ -392,9 +392,16 @@ func (m Migrator) ColumnTypes(value interface{}) ([]gorm.ColumnType, error) {
 			}
 
 			for _, c := range rawColumnTypes {
-				if c.Name() == column.NameValue.String {
-					column.SQLColumnType = c
-					break
+				if m.Dialector.IgnoreUpperLowerCase {
+					if strings.EqualFold(c.Name(), column.NameValue.String) {
+						column.SQLColumnType = c
+						break
+					}
+				} else {
+					if c.Name() == column.NameValue.String {
+						column.SQLColumnType = c
+						break
+					}
 				}
 			}
 
